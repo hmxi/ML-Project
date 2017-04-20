@@ -5,7 +5,7 @@ clc; clear; close all;
 numCluster = 3; % three clusters of machine nodes
 APPos = [0 0];
 
-clusterCenters = [20 20; 0 -20; -20 20];
+clusterCenters = [50 50; 0 -50; -50 50];
 
 xyAP = [0 0]; % coordinates of the access point
 

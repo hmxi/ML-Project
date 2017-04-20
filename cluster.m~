@@ -85,7 +85,6 @@ classdef cluster < hgsetget
             SNR = obj.Ptx - obj.Nf - obj.N0 - 10*log10(obj.bw) - obj.channelLoss2Coord;
             SNR2AP = obj.Ptx - obj.Nf - obj.N0 - 10*log10(obj.bw) - obj.channelLoss2AP;
 
-            % Obtaine rate from SNR using Shannon's law
             rate = (obj.channelLoss2Coord ~=0).*(bwPerNode.*log2(1+10.^(0.1*SNR))) + ...
                 (obj.channelLoss2Coord == 0).*(obj.bw*log2(1+ 10.^(0.1*SNR2AP)));
             
@@ -93,10 +92,9 @@ classdef cluster < hgsetget
                 (obj.channelLoss2Coord == 0).*(obj.numNodes*obj.nBitsTx*ones(obj.numNodes,1));
                     
             
-            % TX time is num of bits/ rate
             txTime = numBits ./ rate;
             
-            obj.nodeEnergyUsage = obj.nodeEnergyUsage + 10.^(0.1*obj.Ptx).*txTime*1e-3;
+            obj.nodeEnergyUsage = obj.nodeEnergyUsage + (obj.Ptx.*txTime;
         end
     end
     
