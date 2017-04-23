@@ -43,10 +43,15 @@ for i=1:nEpochs
     
     % TBD: Send this to the BS.
     
+    % BS has all different experts residing. Job of each expert is to find
+    % leader coordinates with confidences using any alogirhtm
+    Leaders = AP.selectCoordinators(topology);  % Has 'average' distance measures for all choices of leaders for each cluster
+    [dis,leaderIndx]=min(Leaders);
+    
     % BS returns the "leader coordinates"
     % Populate the leader co-ordinates in xyLeaders
     % this can also be a map of sorts.
-    xyLeaders = [c1.nodesPos(1,:); c2.nodesPos(1,:); c3.nodesPos(1,:)]; % TBD TBD
+    xyLeaders = [c1.nodesPos(leaderIndx(1),:); c2.nodesPos(leaderIndx(2),:); c3.nodesPos(leaderIndx(3),:)]; % TBD TBD
     
     c1.computeLoss2Coordinator(xyLeaders(1,:));
     c2.computeLoss2Coordinator(xyLeaders(2,:));
